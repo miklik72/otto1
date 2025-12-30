@@ -2,6 +2,10 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"name": "otto-steps2",
+			"path": "otto-steps2"
 		}
 	],
 	"settings": {}
