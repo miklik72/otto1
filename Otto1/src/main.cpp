@@ -9,7 +9,7 @@
 #include <EEPROM.h>
 #include <Servo.h>
 #include <Otto.h> //-- Otto Library
-Otto Otto;  //This is Otto!
+Otto otto1;  //This is Otto!
 
 #define LeftLeg 2
 #define RightLeg 3
@@ -42,15 +42,15 @@ void calib_homePos() {
   servoPos[1]=90;
   servoPos[2]=90;
   servoPos[3]=90;
-  Otto._moveServos(500, servoPos);
-  Otto.detachServos();
+  otto1._moveServos(500, servoPos);
+  otto1.detachServos();
   printCalibration();
 }
 
 
 
 void setup(){
-      Otto.init(LeftLeg, RightLeg, LeftFoot, RightFoot, true, Buzzer); //Set the servo pins and Buzzer pin
+      otto1.init(LeftLeg, RightLeg, LeftFoot, RightFoot, true, Buzzer); //Set the servo pins and Buzzer pin
     Serial.begin(115200);
     YL = EEPROM.read(0);
     if (YL > 128) YL -= 256;
@@ -60,8 +60,8 @@ void setup(){
     if (RL > 128) RL -= 256;
     RR = EEPROM.read(3);
     if (RR > 128) RR -= 256;
-    Otto.sing(S_connection);
-    Otto.home();
+    otto1.sing(S_connection);
+    otto1.home();
     Serial.println("OTTO CALIBRATION PROGRAM");
     Serial.println("PRESS a or z for adjusting Left Leg");
     Serial.println("PRESS s or x for adjusting Left Foot");
@@ -69,7 +69,7 @@ void setup(){
     Serial.println("PRESS j or n for adjusting Right Foot");
     Serial.println();
     Serial.println("PRESS f to test Otto walking");
-    Serial.println("PRESS h to return servos to home position"); 
+    Serial.println("PRESS h to return servos to home position");
     printCalibration();
 }
 
@@ -81,59 +81,59 @@ void loop(){
     }
     if(((charRead)==('a' ))){
         YL++;
-        Otto.setTrims(YL,YR,RL,RR);
+        otto1.setTrims(YL,YR,RL,RR);
         calib_homePos();
-        Otto.saveTrimsOnEEPROM();
+        otto1.saveTrimsOnEEPROM();
     }else{
         if(((charRead)==( 'z' ))){
             YL--;
-            Otto.setTrims(YL,YR,RL,RR);
+            otto1.setTrims(YL,YR,RL,RR);
             calib_homePos();
-            Otto.saveTrimsOnEEPROM();
+            otto1.saveTrimsOnEEPROM();
         }else{
             if(((charRead)==( 's' ))){
                 RL++;
-                Otto.setTrims(YL,YR,RL,RR);
+                otto1.setTrims(YL,YR,RL,RR);
                 calib_homePos();
-                Otto.saveTrimsOnEEPROM();
+                otto1.saveTrimsOnEEPROM();
             }else{
                 if(((charRead)==( 'x' ))){
                     RL--;
-                    Otto.setTrims(YL,YR,RL,RR);
+                    otto1.setTrims(YL,YR,RL,RR);
                     calib_homePos();
-                    Otto.saveTrimsOnEEPROM();
+                    otto1.saveTrimsOnEEPROM();
                 }else{
                     if(((charRead)==( 'k' ))){
                         YR++;
-                        Otto.setTrims(YL,YR,RL,RR);
+                        otto1.setTrims(YL,YR,RL,RR);
                         calib_homePos();
-                        Otto.saveTrimsOnEEPROM();
+                        otto1.saveTrimsOnEEPROM();
                     }else{
                         if(((charRead)==( 'm' ))){
                             YR--;
-                            Otto.setTrims(YL,YR,RL,RR);
+                            otto1.setTrims(YL,YR,RL,RR);
                             calib_homePos();
-                            Otto.saveTrimsOnEEPROM();
+                            otto1.saveTrimsOnEEPROM();
                         }else{
                             if(((charRead)==( 'j' ))){
                                 RR++;
-                                Otto.setTrims(YL,YR,RL,RR);
+                                otto1.setTrims(YL,YR,RL,RR);
                                 calib_homePos();
-                                Otto.saveTrimsOnEEPROM();
+                                otto1.saveTrimsOnEEPROM();
                             }else{
                                 if(((charRead)==( 'n' ))){
                                     RR--;
-                                    Otto.setTrims(YL,YR,RL,RR);
+                                    otto1.setTrims(YL,YR,RL,RR);
                                     calib_homePos();
-                                    Otto.saveTrimsOnEEPROM();
+                                    otto1.saveTrimsOnEEPROM();
                                 }else{
                                     if(((charRead)==( 'f' ))){
-                                        Otto.sing(S_fart1);
-                                        Otto.walk(1,1000,1);
+                                        otto1.sing(S_fart1);
+                                        otto1.walk(1,1000,1);
                                     }else{
                                         if(((charRead)==( 'h' ))){
-                                            Otto.sing(S_mode1);
-                                            Otto.home();
+                                            otto1.sing(S_mode1);
+                                            otto1.home();
                                         }else{
                                         }
                                     }
